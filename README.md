@@ -1,4 +1,4 @@
-# geekswebbot
+# mytestbot
 Create bot for your website or blog easily with GeeksWebBot (GWB).
 
 ##Description
@@ -9,11 +9,11 @@ The use of this bot application is not difficult, you just need to copy/paste th
 	$client = new Zelenin\Telegram\Bot\Api('AccessToken');
 	$url = 'Your website RSS feed';
 
-##Usage 
+##Usage
 The working version of this bot program is deployed for [blog.madadipouya.com](blog.madadipouya.com) AKA WeeksWeb on HeroKu. Click on  [telegram.me/GeeksWebBot](telegram.me/GeeksWebBot) link to start interaction with the bot.
 
 List of available commands for this bot are,
-	
+
 - ````/help```` Shows list of available commands
 - ````/email```` Gets email address of the blog owner
 - ````/latest```` Displays the latest of the blog
