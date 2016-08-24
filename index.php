@@ -34,14 +34,6 @@ try {
         	'text' => "I'll be happy to answer if you ask a question..."
      	]);
     }
-    else if($update->message->text == '')
-    {
-    	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-    	$response = $client->sendMessage([
-    		'chat_id' => $update->message->chat->id,
-    		'text' => "Hi, I am the test Bot for Service Bot. \n What can I do you for?"
-    		]);
-    }
     else if($update->message->text == '/help')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
