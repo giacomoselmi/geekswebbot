@@ -34,7 +34,7 @@ try {
         	'text' => "I'll be happy to answer if you ask a question..."
      	]);
     }
-    else if($update->message->text == '/start')
+    else if($update->message->text == '')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
