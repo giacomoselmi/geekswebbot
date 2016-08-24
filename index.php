@@ -34,6 +34,14 @@ try {
         	'text' => "I'll be happy to answer if you ask a question..."
      	]);
     }
+    else if($update->message->text == 'cazzaro')
+    {
+    	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    	$response = $client->sendMessage([
+    		'chat_id' => $update->message->chat->id,
+    		'text' => "Ti pregherei di usare un linguaggio più appropriato"
+    		]);
+    }
     else if($update->message->text == '/help')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
