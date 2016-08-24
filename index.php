@@ -26,19 +26,6 @@ $update = json_decode(file_get_contents('php://input'));
 //your app
 try {
 
-    $response = Telegram::getMe();
-
-    $botId = $response->getId();
-    $firstName = $response->getFirstName();
-    $username = $response->getUsername();
-
-    $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-    $response = $client->sendMessage([
-      'chat_id' => $update->message->chat->id,
-      'text' => $username
-      ]);
-
-
     if($update->message->text == '/answerme')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
@@ -70,8 +57,7 @@ try {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
     		'chat_id' => $update->message->chat->id,
-        'text' => $username
-//    		'text' => "Invalid command, please use /help to get list of available commands"
+    		'text' => "Invalid command, please use /help to get list of available commands"
     		]);
     }
 
