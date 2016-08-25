@@ -81,20 +81,21 @@ try {
 
         sleep(5);
 
-        $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = $result;";
+        $new_id = pg_fetch_array($result);
+        $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = $new_id;";
         $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
-
-        // free resultset
-        pg_free_result($result);
-        pg_free_result($result_sel);
-        // close connection
-        pg_close($db);
 
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
         $response = $client->sendMessage([
           'chat_id' => $update->message->chat->id,
           'text' => "Here is your Case Number: $result_sel"
           ]);
+
+        // free resultset
+        pg_free_result($result);
+        pg_free_result($result_sel);
+        // close connection
+        pg_close($db);
 
     }
     // else
