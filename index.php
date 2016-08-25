@@ -76,21 +76,13 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-//        $query = "INSERT INTO Case (AccountId, Description, Priority, RecordTypeId, Status)
-//        VALUES ('0012400000eiYSb', 'A Support Case', 'Medium', '012240000002iSKAAY', 'New');";
-//        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+        $query = "INSERT INTO salesforce.case (AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('0012400000eiYSb', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ');";
+        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
         // free resultset
-//        pg_free_result($result);
+        pg_free_result($result);
         // close connection
         pg_close($db);
-
-
-        $response = $client->sendMessage([
-          'chat_id' => $update->message->chat->id,
-          'text' => "$url - $host - $port - $user - $password - $dbname - $connect_string"
-          ]);
-
 
 
 
