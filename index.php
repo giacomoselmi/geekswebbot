@@ -26,10 +26,13 @@ $update = json_decode(file_get_contents('php://input'));
 //your app
 try {
 
-  $response = $client->sendMessage([
-      'chat_id' => $update->message->chat->id,
-      'text' => "Hi, what's up!?"
-  ]);
+    if($update->message->text == '')
+    {
+      $response = $client->sendMessage([
+        'chat_id' => $update->message->chat->id,
+        'text' => "Hi, what's up!?"
+      ]);
+    }
 
     if($update->message->text == '/answerme')
     {
