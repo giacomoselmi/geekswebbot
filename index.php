@@ -81,8 +81,9 @@ try {
 
         sleep(10);
 
-        $new_id = pg_fetch_result($result);
-        $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = $new_id;";
+        $row = pg_fetch_row($result);
+        $new_id = $row[0];
+        $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = '$new_id';";
         $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
 
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
