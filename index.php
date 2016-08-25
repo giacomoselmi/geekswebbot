@@ -85,6 +85,15 @@ try {
         // close connection
         pg_close($db);
 
+
+        $response = $client->sendMessage([
+          'chat_id' => $update->message->chat->id,
+          'text' => "$url - $host - $port - $user - $password - $dbname - $connect_string"
+          ]);
+
+
+
+
     }
     // else
     // {
