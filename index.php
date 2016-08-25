@@ -76,12 +76,12 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-        $query = "INSERT INTO Case (AccountId, Description, Priority, RecordTypeId, Status)
-        VALUES ('0012400000eiYSb', 'A Support Case', 'Medium', '012240000002iSKAAY', 'New');";
-        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+//        $query = "INSERT INTO Case (AccountId, Description, Priority, RecordTypeId, Status)
+//        VALUES ('0012400000eiYSb', 'A Support Case', 'Medium', '012240000002iSKAAY', 'New');";
+//        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
         // free resultset
-        pg_free_result($result);
+//        pg_free_result($result);
         // close connection
         pg_close($db);
 
