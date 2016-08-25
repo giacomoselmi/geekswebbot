@@ -86,10 +86,12 @@ try {
         $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = '$new_id';";
         $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
 
+        $row2 = pg_fetch_row($result_sel);
+        $case_n = $row2[0];
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
         $response = $client->sendMessage([
           'chat_id' => $update->message->chat->id,
-          'text' => "Here is your Case Number: $result_sel"
+          'text' => "Here is your Case Number: $case_n"
           ]);
 
         // free resultset
