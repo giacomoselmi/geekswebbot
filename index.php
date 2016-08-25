@@ -26,7 +26,7 @@ $update = json_decode(file_get_contents('php://input'));
 //your app
 try {
 
-    if($update->message->text == '')
+    if($update->message->text == 'ciao')
     {
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
