@@ -28,11 +28,10 @@ try {
 
     if($update->message->text == 'ciao')
     {
-      $user = $update->message->from;
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
 //        'text' => "Hi, what's up!?"
-        'text' => $user
+        'text' => $update->message->from
       ]);
     }
 
