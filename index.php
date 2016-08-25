@@ -79,9 +79,9 @@ try {
         $query = "INSERT INTO salesforce.case (AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('0012400000eiYSb', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
-        sleep(5);
+        sleep(10);
 
-        $new_id = pg_fetch_array($result);
+        $new_id = pg_fetch_result($result);
         $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = $new_id;";
         $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
 
