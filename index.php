@@ -31,7 +31,7 @@ try {
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
 //        'text' => "Hi, what's up!?"
-        'text' => $update->message->from
+        'text' => $update->message->from->username
       ]);
     }
 
