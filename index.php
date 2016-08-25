@@ -77,7 +77,7 @@ try {
         $db = pg_connect($connect_string);
 
         $query = "INSERT INTO Case (AccountId, Description, Priority, RecordTypeId, Status)
-        VALUES ('0012400000eiYSb', 'A Support Case', 'Medium', '	012240000002iSCAAY', 'New');";
+        VALUES ('0012400000eiYSb', 'A Support Case', 'Medium', '012240000002iSKAAY', 'New');";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
         // free resultset
