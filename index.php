@@ -76,15 +76,25 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-        $query = "INSERT INTO salesforce.case (AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('0012400000eiYSb', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ');";
+        $query = "INSERT INTO salesforce.case (AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('0012400000eiYSb', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+
+        sleep(5);
+
+        $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = $result;";
+        $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
 
         // free resultset
         pg_free_result($result);
+        pg_free_result($result_sel);
         // close connection
         pg_close($db);
 
-
+        $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+        $response = $client->sendMessage([
+          'chat_id' => $update->message->chat->id,
+          'text' => "Here is your Case Number: $result_sel"
+          ]);
 
     }
     // else
