@@ -30,7 +30,7 @@ try {
     {
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
-        'text' => "Hi, what's up!?"
+        'text' => "Hi," "what's up!?"
       ]);
     }
 
@@ -50,6 +50,15 @@ try {
     		'text' => "List of commands :\n /answerme -> Provides an answer, any answer
     		/help -> Shows list of available commands"
     		]);
+
+    }
+    else if($update->message->text == '/case')
+    {
+      $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+      $response = $client->sendMessage([
+        'chat_id' => $update->message->chat->id,
+        'text' => "I will create a Case for you"
+        ]);
 
     }
     // else
