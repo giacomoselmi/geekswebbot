@@ -77,7 +77,7 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-        $query_c = "SELECT sfid, AccountId, name FROM salesforce.contact WHERE Id = @'$my_user';";
+        $query_c = "SELECT sfid, AccountId, name FROM salesforce.contact WHERE Id = @'$my_username';";
         $result_c = pg_query($query_c) or die('Query failed: ' . pg_last_error());
 
         $row_c = pg_fetch_row($result_c);
