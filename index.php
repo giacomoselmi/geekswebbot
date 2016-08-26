@@ -33,7 +33,7 @@ try {
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
 //        'text' => "Hi, what's up!?"
-        'text' => "Hi, $my_user (@$my_username), what's up!?"
+        'text' => "Hi, $my_user, what's up!? What can I do for you?"
       ]);
     }
 
@@ -60,7 +60,23 @@ try {
       $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
-        'text' => "I will create a Case for you"
+        'text' => "Can you tell me in brief what your problem is about?"
+        ]);
+
+      $case_subject = $update->message->text;
+
+      $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+      $response = $client->sendMessage([
+        'chat_id' => $update->message->chat->id,
+        'text' => "Can you describe your problem now?"
+        ]);
+
+      $case_desc = $update->message->text;
+
+      $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+      $response = $client->sendMessage([
+        'chat_id' => $update->message->chat->id,
+        'text' => "$case_subject \n $case_desc \n I will create a Case for you"
         ]);
 
         //create a connection string from the PG database URL and then use it to connect
@@ -84,16 +100,6 @@ try {
         $contact_id = pg_fetch_result($result_c, 0, 'sfid');
         $account_id = pg_fetch_result($result_c, 0, 'AccountId');
         $c_name  = pg_fetch_result($result_c, 0, 'name');
-
-
-
-        $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-        $response = $client->sendMessage([
-          'chat_id' => $update->message->chat->id,
-          'text' => "U: @$my_username - C: $contact_id - A: $account_id - N: $c_name"
-          ]);
-
-
 
         $query = "INSERT INTO salesforce.case (ContactId, AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('$contact_id','$account_id', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
