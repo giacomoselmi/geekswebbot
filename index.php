@@ -29,10 +29,11 @@ try {
     if($update->message->text == 'ciao')
     {
       $my_user = $update->message->from->first_name;
+      $my_username = $update->message->from->username;
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
 //        'text' => "Hi, what's up!?"
-        'text' => "Hi, $my_user, what's up!?"
+        'text' => "Hi, $my_user ($my_username), what's up!?"
       ]);
     }
 
@@ -107,7 +108,7 @@ try {
         // free resultset
         pg_free_result($result);
         pg_free_result($result_sel);
-        pg_free_result($result_c);        
+        pg_free_result($result_c);
         // close connection
         pg_close($db);
 
