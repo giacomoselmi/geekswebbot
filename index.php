@@ -33,7 +33,7 @@ try {
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
 //        'text' => "Hi, what's up!?"
-        'text' => "Hi, $my_user ($my_username), what's up!?"
+        'text' => "Hi, $my_user (@$my_username), what's up!?"
       ]);
     }
 
@@ -77,7 +77,7 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-        $query_c = "SELECT sfid, AccountId, name FROM salesforce.contact WHERE Id = @'$my_username';";
+        $query_c = "SELECT sfid, AccountId, name FROM salesforce.contact WHERE Id = '@$my_username';";
         $result_c = pg_query($query_c) or die('Query failed: ' . pg_last_error());
 
         $row_c = pg_fetch_row($result_c);
