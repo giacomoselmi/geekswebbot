@@ -76,18 +76,28 @@ try {
         $connect_string = $connect_string . "dbname='" . $dbname . "' ";
         $db = pg_connect($connect_string);
 
-        $query = "INSERT INTO salesforce.case (AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('0012400000eiYSb', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
+        $query_c = "SELECT sfid, AccountId, name FROM salesforce.contact WHERE Id = @'$my_user';";
+        $result_c = pg_query($query_c) or die('Query failed: ' . pg_last_error());
+
+        $row_c = pg_fetch_row($result_c);
+        $contact_id = $row_c[0];
+        $account_id = $row_c[1];
+        $c_name  = $row_c[2];
+
+        $query = "INSERT INTO salesforce.case (ContactId, AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('$contact_id','$account_id', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
         sleep(10);
 
         $row = pg_fetch_row($result);
         $new_id = $row[0];
+
         $query_sel = "SELECT casenumber FROM salesforce.case WHERE Id = '$new_id';";
         $result_sel = pg_query($query_sel) or die('Query failed: ' . pg_last_error());
 
         $row2 = pg_fetch_row($result_sel);
         $case_n = $row2[0];
+
         $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
         $response = $client->sendMessage([
           'chat_id' => $update->message->chat->id,
@@ -97,6 +107,7 @@ try {
         // free resultset
         pg_free_result($result);
         pg_free_result($result_sel);
+        pg_free_result($result_c);        
         // close connection
         pg_close($db);
 
