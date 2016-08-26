@@ -81,9 +81,9 @@ try {
         $result_c = pg_query($query_c) or die('Query failed: ' . pg_last_error());
 
         //$row_c = pg_fetch_row($result_c);
-        $contact_id = pg_fetch_result($result_c, 0, 0);
-        $account_id = pg_fetch_result($result_c, 0, 1);
-        $c_name  = pg_fetch_result($result_c, 0, 2);
+        $contact_id = pg_fetch_result($result_c, 0, 'sfid');
+        $account_id = pg_fetch_result($result_c, 0, 'AccountId');
+        $c_name  = pg_fetch_result($result_c, 0, 'name');
 
         $query = "INSERT INTO salesforce.case (ContactId, AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('$contact_id','$account_id', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
