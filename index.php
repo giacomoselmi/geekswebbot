@@ -85,6 +85,16 @@ try {
         $account_id = pg_fetch_result($result_c, 0, 'AccountId');
         $c_name  = pg_fetch_result($result_c, 0, 'name');
 
+
+
+        $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+        $response = $client->sendMessage([
+          'chat_id' => $update->message->chat->id,
+          'text' => "U: @$my_username - C: $contact_id - A: $account_id - N: $c_name"
+          ]);
+
+
+
         $query = "INSERT INTO salesforce.case (ContactId, AccountId, Subject, Description, Priority, RecordTypeId, Status, BusinessHoursId) VALUES ('$contact_id','$account_id', 'Support Case', 'A Nice Support Case', 'Medium', '012240000002iSKAAY', 'New', '01m2400000001gYAAQ') RETURNING Id;";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
 
