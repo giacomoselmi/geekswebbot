@@ -60,23 +60,7 @@ try {
       $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
       $response = $client->sendMessage([
         'chat_id' => $update->message->chat->id,
-        'text' => "Can you tell me in brief what your problem is about?"
-        ]);
-
-      $case_subject = $update->message->text;
-
-      $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-      $response = $client->sendMessage([
-        'chat_id' => $update->message->chat->id,
-        'text' => "Can you describe your problem now?"
-        ]);
-
-      $case_desc = $update->message->text;
-
-      $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
-      $response = $client->sendMessage([
-        'chat_id' => $update->message->chat->id,
-        'text' => "$case_subject \n $case_desc \n I will create a Case for you"
+        'text' => "Let's open a Case for you..."
         ]);
 
         //create a connection string from the PG database URL and then use it to connect
