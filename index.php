@@ -47,7 +47,8 @@ try {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => "I'll be happy to answer if you ask a question... -- $my_prev_bot_message"
+        	'text' => "I'll be happy to answer if you ask a question... -- $my_prev_bot_message  "
+      $response = $telegram->forceReply();
      	]);
     }
     else if($update->message->text == '/help')
