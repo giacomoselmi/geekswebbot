@@ -47,7 +47,7 @@ try {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => "Just a test, don't worry...",
+        	'text' => "Just a test, don't worry..."
      	]);
 //      $response = $client->ForceReply(['force_reply' => true]);
 
@@ -56,7 +56,7 @@ try {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => "I'll be happy to answer if you ask a question...",
+        	'text' => "I'll be happy to answer if you ask a question..."
      	]);
 //      $response = $client->ForceReply(['force_reply' => true]);
     }
