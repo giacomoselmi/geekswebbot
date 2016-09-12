@@ -118,7 +118,7 @@ try {
         pg_close($db);
 
     }
-    else if(strpos_array($my_message, $key_answer_array) !== FALSE)
+    else if(strpos_array($my_message, $key_answer_array) != 0)
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
@@ -150,6 +150,12 @@ try {
     // 		]);
     // }
 
+} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
+
+    //echo error message ot log it
+    //echo $e->getMessage();
+
+}
 
 function strpos_array($haystack, $needles) {
     if ( is_array($needles) ) {
@@ -166,11 +172,4 @@ function strpos_array($haystack, $needles) {
     } else {
         return strpos($haystack, $needles);
     }
-}
-
-} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
-
-    //echo error message ot log it
-    //echo $e->getMessage();
-
 }
