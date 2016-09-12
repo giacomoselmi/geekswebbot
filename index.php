@@ -42,7 +42,7 @@ try {
       ]);
     }
 
-    if($update->message->text == 'test')
+    else if($update->message->text == 'test')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
@@ -51,7 +51,7 @@ try {
      	]);
 //      $response = $client->ForceReply(['force_reply' => true]);
 
-    if($update->message->text == '/answerme')
+    else if($update->message->text == '/answerme')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
