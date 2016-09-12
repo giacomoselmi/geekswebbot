@@ -50,7 +50,7 @@ try {
         	'text' => "Just a test, don't worry..."
      	]);
 //      $response = $client->ForceReply(['force_reply' => true]);
-
+    }
     else if($update->message->text == '/answerme')
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
