@@ -123,7 +123,7 @@ try {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
-        	'text' => "Let's open a Case for you... Can you give me a short title for the problem?"
+        	'text' => "Let's open a Case for you... Can you give me a short title for the problem? -- $my_prev_bot_message"
      	]);
     }
     else if($update->message->text == '/help')
