@@ -48,8 +48,8 @@ try {
     	$response = $client->sendMessage([
         	'chat_id' => $update->message->chat->id,
         	'text' => "I'll be happy to answer if you ask a question...",
-          'reply_markup' => $client->ForceReply(['force_reply' => true])
      	]);
+      $response = $client->ForceReply(['force_reply' => true,])
     }
     else if($update->message->text == '/help')
     {
