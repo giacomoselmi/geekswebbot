@@ -26,8 +26,8 @@ $my_user = $update->message->from->first_name;
 $my_username = $update->message->from->username;
 $my_message = $update->message->text;
 $my_prev_bot_message = $update->message->reply_to_message;
-//$key_answer_array = array("problem", "issue", "need help", "not working");
-$key_answer_array = array('a' => "problem",'b' => "problem", 'c' => "need help", 'd' => "not working");
+$key_answer_array = array("problem", "issue", "need help", "not working");
+//$key_answer_array = array('a' => "problem",'b' => "problem", 'c' => "need help", 'd' => "not working");
 
 
 //your app
@@ -154,6 +154,11 @@ try {
 
     //echo error message ot log it
     //echo $e->getMessage();
+    $response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    $response = $client->sendMessage([
+      'chat_id' => $update->message->chat->id,
+      'text' => "$e"
+      ]);
 
 }
 
