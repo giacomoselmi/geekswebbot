@@ -27,6 +27,8 @@ $my_username = $update->message->from->username;
 $my_message = $update->message->text;
 $my_prev_bot_message = $update->message->reply_to_message;
 $key_answer_array = array("problem", "issue", "need help", "not working");
+//array('a' => "problem",'b' => "problem", 'c' => "need help", 'd' => "not working");
+
 
 //your app
 try {
@@ -116,9 +118,7 @@ try {
         pg_close($db);
 
     }
-
-
-    if(strpos_array($my_message, $key_answer_array) !== FALSE)
+    else if(strpos_array($my_message, $key_answer_array) !== FALSE)
     {
     	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
     	$response = $client->sendMessage([
@@ -150,12 +150,7 @@ try {
     // 		]);
     // }
 
-} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
 
-    //echo error message ot log it
-    //echo $e->getMessage();
-
-}
 
 function strpos_array($haystack, $needles) {
     if ( is_array($needles) ) {
@@ -172,4 +167,12 @@ function strpos_array($haystack, $needles) {
     } else {
         return strpos($haystack, $needles);
     }
+}
+
+
+} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
+
+    //echo error message ot log it
+    //echo $e->getMessage();
+
 }
