@@ -24,6 +24,9 @@ $url = ''; // URL RSS feed
 $update = json_decode(file_get_contents('php://input'));
 $my_user = $update->message->from->first_name;
 $my_username = $update->message->from->username;
+$my_message = $update->message->text;
+$my_prev_bot_message = $update->message->reply_to_message;
+$key_answer_array = array("problem", "issue", "need help", "not working");
 
 //your app
 try {
@@ -113,6 +116,31 @@ try {
         pg_close($db);
 
     }
+
+
+    if(strpos_array($my_message, $key_answer_array) !== FALSE)
+    {
+    	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    	$response = $client->sendMessage([
+        	'chat_id' => $update->message->chat->id,
+        	'text' => "Let's open a Case for you... Can you give me a short title for the problem?"
+     	]);
+    }
+    else if($update->message->text == '/help')
+    {
+    	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
+    	$response = $client->sendMessage([
+    		'chat_id' => $update->message->chat->id,
+    		'text' => "List of commands :\n /answerme -> Provides an answer, any answer
+    		/help -> Shows list of available commands"
+    		]);
+
+    }
+
+
+
+
+
     // else
     // {
     // 	$response = $client->sendChatAction(['chat_id' => $update->message->chat->id, 'action' => 'typing']);
@@ -127,4 +155,21 @@ try {
     //echo error message ot log it
     //echo $e->getMessage();
 
+}
+
+function strpos_array($haystack, $needles) {
+    if ( is_array($needles) ) {
+        foreach ($needles as $str) {
+            if ( is_array($str) ) {
+                $pos = strpos_array($haystack, $str);
+            } else {
+                $pos = strpos($haystack, $str);
+            }
+            if ($pos !== FALSE) {
+                return $pos;
+            }
+        }
+    } else {
+        return strpos($haystack, $needles);
+    }
 }
