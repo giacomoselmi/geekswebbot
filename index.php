@@ -151,7 +151,6 @@ try {
     // }
 
 
-
 function strpos_array($haystack, $needles) {
     if ( is_array($needles) ) {
         foreach ($needles as $str) {
@@ -168,7 +167,6 @@ function strpos_array($haystack, $needles) {
         return strpos($haystack, $needles);
     }
 }
-
 
 } catch (\Zelenin\Telegram\Bot\NotOkException $e) {
 
