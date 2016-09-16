@@ -49,7 +49,7 @@ try {
         	'chat_id' => $update->message->chat->id,
         	'text' => "Just a test, don't worry..."
      	]);
-      $response = $client->ForceReply();
+//      $response = $client->ForceReply();
     }
 
     else if($update->message->text == '/answerme')
